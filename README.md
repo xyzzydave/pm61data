@@ -1,6 +1,5 @@
 <h1>pm61data code challenge
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Creation_of_man_Prometheus_Berthelemy_Louvre_INV20043.jpg" alt="Lighting the Way" /></h1>
-<h2>This project will</h2>
 <h2>This project will create a vpc, an ec2 and a lambda that checks port 22 on the ec2 instance continually.</h2>
 <br>
 To create everything run the create_proj.sh.<br>
@@ -54,8 +53,7 @@ install some software)</li>
 <li>This instance only allows inbound access from port 22
 <h3>Lambda Function</h3>
 Write a simple Lambda function with following requirements:
-<ol>
 <li>This lambda function needs to be placed in the same subnet as the private instance.</li>
 <li>This lambda function checks if port 22 of the instance is up and running. Output the
 status of port 22 to a Cloudwatch logstream.</li>
- <li>Configure an event rule for this Lambda function to execute every minute.</li></ol></ol>
+ <li>Configure an event rule for this Lambda function to execute every minute.</li></ol>
