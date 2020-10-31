@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: ec2 in priv sub with ssm manager
+
+Parameters:
+  VPC:
+    Description: Enter the VPC to place the ec2 in
+    Type: String
+  Environment:
+    Description: Enter the Environment
+    Type: String
+    Default: pm61data
+  AvailabilityZone1:
+    Description: Enter the az
+    Type: String
+  PrivateSubnet1:
+    Description: Enter the privsub
+    Type: String
+  PrivateHostSecurityGroup:
+    Description: Enter the sg
+    Type: String
+  PEMFileName:
+    Description: ssh key name
+    Type: String
+
+Resources:
+
+  PrivateHost:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      AvailabilityZone: !Ref AvailabilityZone1
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            VolumeSize: '20'
+            VolumeType: gp2
+      ImageId: ami-005bdb005fb00e791
+      IamInstanceProfile: !Ref RootInstanceProfile
+      NetworkInterfaces:
+        - DeviceIndex: '0'
+          AssociatePublicIpAddress: false
+          DeleteOnTermination: 'true'
+          GroupSet:
+            - !Ref PrivateHostSecurityGroup
+          SubnetId: !Ref PrivateSubnet1
+      InstanceType: t2.micro
+      KeyName: !Ref PEMFileName
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref Environment, PrivateHost ]]       
+      UserData: 
+        Fn::Base64:
+          #!/bin/bash
+          mkdir /tmp/ssm
+          cd /tmp/ssm
+          wget https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb
+          sudo dpkg -i amazon-ssm-agent.deb
+          sudo systemctl enable amazon-ssm-agent          
+  
+  RootInstanceProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Path: /
+      Roles:
+        - !Ref EC2RootRole      
+  EC2RootRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM
+        
+Outputs:
+  NodeIp:
+    Description: The node ip addr
+    Value: !GetAtt PrivateHost.PrivateIp
+    Export:
+      Name: NodeIp

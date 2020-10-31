@@ -1,0 +1,8 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: An s3 bucket for code projects
+
+Resources:  
+  s3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: pm61data-ddockhorn

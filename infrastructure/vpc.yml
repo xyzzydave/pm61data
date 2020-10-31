@@ -1,0 +1,181 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: VPC with ec2 and lambda
+
+
+Parameters:
+  AvailabilityZone1:
+    Description: The first availability zones where the resources will be initiated
+    Type: 'AWS::EC2::AvailabilityZone::Name'
+    ConstraintDescription: Must be a valid availability zones. 
+    Default: us-west-2a
+  AvailabilityZone2:
+    Description: The second availability zones where the resources will be initiated
+    Type: 'AWS::EC2::AvailabilityZone::Name'
+    ConstraintDescription: Must be a valid availability zones. 
+    Default: us-west-2b
+  Environment:
+    Description: Enter the Environment
+    Type: String
+    Default: pm61data
+  PEMFileName:
+    Description: Enter the PEM file name
+    Type: String
+    Default: testkey1
+    ConstraintDescription: Must be a valid string.
+  s3Bucket:
+    Description: Enter the bucket name where the template files are from the git repo submitted for the test.
+    Type: String
+    Default: pm61data-ddockhorn
+  
+Resources:
+  VPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: 10.10.0.0/16
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref Environment, VPC ]]
+  PublicSubnet1:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.10.10.0/24
+      AvailabilityZone: !Ref AvailabilityZone1
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref Environment, PublicSubnet1 ]]
+  PublicSubnet2:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.10.20.0/24
+      AvailabilityZone: !Ref AvailabilityZone2
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref Environment, PublicSubnet2 ]] 
+  InternetGateway:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref Environment, InternetGateway ]] 
+  AttachGateway:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+  PublicRouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref Environment, PublicRouteTable ]] 
+  Route:
+    Type: 'AWS::EC2::Route'
+    DependsOn: AttachGateway
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  SubnetPublicRouteTableAssociation1:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet1
+      RouteTableId: !Ref PublicRouteTable
+  SubnetPublicRouteTableAssociation2:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet2
+      RouteTableId: !Ref PublicRouteTable
+
+  PrivateSubnet1:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.10.30.0/24
+      AvailabilityZone: !Ref AvailabilityZone1
+      Tags:
+        - Key: Name
+          Value:  !Join ['-', [ !Ref Environment, PrivateSubnet1 ]]
+  PrivateSubnet2:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.10.40.0/24
+      AvailabilityZone: !Ref AvailabilityZone2
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref Environment, PrivateSubnet2 ]]
+  EIP:
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: VPC
+  NATGateway:
+    DependsOn: AttachGateway
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      AllocationId: !GetAtt 
+        - EIP
+        - AllocationId
+      SubnetId: !Ref PublicSubnet1
+      Tags:
+        - Key: Name
+          Value:  !Join ['-', [ !Ref Environment, NATGateway ]] 
+  PrivateRouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value:  !Join ['-', [ !Ref Environment, PrivateRouteTable ]]
+  PrivateRoute:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NATGateway
+  SubnetPrivateRouteTableAssociation1:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PrivateSubnet1
+      RouteTableId: !Ref PrivateRouteTable
+  SubnetPrivateRouteTableAssociation2:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PrivateSubnet2
+      RouteTableId: !Ref PrivateRouteTable
+  PrivateHostSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Security group for a bastian host. Only port 22 is allowd
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Join ['-', [ !Ref Environment, PrivateHostSG ]]
+          
+  createEC2:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Join ['',[ 'https://s3-us-west-2.amazonaws.com/', !Ref s3Bucket, '/pm61data/infrastructure/ec2.yml' ]]
+      Parameters:
+        VPC: !Ref VPC
+        Environment: !Ref Environment
+        AvailabilityZone1: !Ref AvailabilityZone1
+        PrivateSubnet1: !Ref PrivateSubnet1
+        PrivateHostSecurityGroup: !Ref PrivateHostSecurityGroup
+        PEMFileName: !Ref PEMFileName
+        
+  createLambda:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: createEC2
+    Properties:
+      TemplateURL: !Join ['',[ 'https://s3-us-west-2.amazonaws.com/', !Ref s3Bucket, '/pm61data/infrastructure/lambda.yml' ]]
+      Parameters:
+        SecurityGroup: !Ref PrivateHostSecurityGroup
+        Subnet: !Ref PrivateSubnet1  
