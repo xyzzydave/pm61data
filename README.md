@@ -1,13 +1,16 @@
 <h1>pm61data code challenge
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Creation_of_man_Prometheus_Berthelemy_Louvre_INV20043.jpg" alt="Lighting the Way" /></h1>
-<h2>This project will create a vpc, an ec2 and a lambda that checks port 22 on the ec2 instance continually.</h2>
-<br>
-To create everything run the create_proj.sh.<br>
-This will create an s3 bucket and a key pair, upload a few CloudFormation templates to the bucket and then create 3 stacks.<br>
-A vpc stack.<br>
-An ec2 stack.<br>
-And finally, a lambda stack.<br>
-<br>
+CloudFormation and the aws cli are the tools used to achieve the goals of the project.<br>
+This proect will;
+<ul>
+<li>create an s3 bucket via cloudformation</li>
+<li>create a key pair</li> 
+<li>upload a few CloudFormation templates to the bucket and then create 3 stacks.</li>
+<ol>
+<li>A vpc stack.</li>
+<li>An ec2 stack.</li>
+<li>And finally, a lambda stack.</li>
+</ol</ul>
 There is also a script to take everything down.<br>
 <br>
 
