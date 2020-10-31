@@ -42,7 +42,7 @@ https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?refid=em_
   <li>cd pm61data</li>
   <li>./create_proj.sh</li>
 </ul></ul>
-Code Challenge Requirements
+<h2>Code Challenge Requirements</h2>
 <h3>VPC</h3>
 <ol><li>The VPC should contain 2 subnets, 1 public and 1 private.</li></ol>
 <h3>EC2 instance</h3>
