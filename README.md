@@ -54,7 +54,7 @@ install some software)</li>
 <li>This instance only allows inbound access from port 22
 <h3>Lambda Function</h3>
 Write a simple Lambda function with following requirements:
-<ul><li>This lambda function needs to be placed in the same subnet as the private instance.</li>
+<ol><li>This lambda function needs to be placed in the same subnet as the private instance.</li>
 <li>This lambda function checks if port 22 of the instance is up and running. Output the
 status of port 22 to a Cloudwatch logstream.</li>
-<li>Configure an event rule for this Lambda function to execute every minute.</li></ul></ol>
+<li>Configure an event rule for this Lambda function to execute every minute.</li></ol></ol>
