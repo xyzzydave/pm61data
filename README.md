@@ -27,7 +27,7 @@ There is also a script to take everything down.<br>
 <h2>Getting started using this repo</h2>
 
 <h3>Quickstart</h3>
-./create_proj.sh <== run that<br>
+./create_proj.sh <== run that and make sure you're in the us-west-2 or Oregon region<br>
 <h3>Instructions</h3>
 Following are instructions to run an .sh script that will use the aws cli to run the cloudformation templates in this repo to create a vpc, ec2 and a lambda according to the pm61data code challenge specifications.
 <h3>Sign up for an aws account</h3>
