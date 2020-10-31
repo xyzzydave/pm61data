@@ -19,6 +19,9 @@ Some of the cool features of this project are; <br>
 &nbsp;&nbsp;&nbsp;&nbsp;it took 6 fairly small files to do all the work.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;the project uses nested stacks to allow for the ec2 and lambda to be updated/replaced independently of the vpc.  
 ## Getting started using this repo
+### Quickstart
+./create_proj.sh <== run that<br>
+### Instructions
 Following are instructions to run an .sh script that will use the aws cli to run the cloudformation templates in this repo to create a vpc, ec2 and a lambda according to the pm61data code challenge specifications.
 ### Sign up for an aws account
 https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?refid=em_127222
