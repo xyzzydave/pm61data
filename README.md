@@ -22,6 +22,7 @@ There is also a script to take everything down.<br>
 <li>There are 2 ways to get an attribute: 1) !Sub ${LambdaSchedule.Arn} 2) !GetAtt LambdaSchedule.Arn I use !Sub in the lambda and GetAtt in the ec2 template just for fun.<br>
 <li>It took 6 fairly small files to do all the work.</li>
 <li>The project uses nested stacks to allow for the ec2 and lambda to be updated/replaced independently of the vpc.</li>
+<li>There is a test!</li>
 </ul>
 <h2>Getting started using this repo</h2>
 
@@ -45,6 +46,8 @@ https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?refid=em_
   <li>cd pm61data</li>
   <li>./create_proj.sh</li>
 </ul></ul>
+<h3>Testing</h3>
+Run the test script and this will close port 22 on the host. You can then observe the lambda will change it's output to reflect the port status.
 <h2>Code Challenge Requirements</h2>
 <h3>VPC</h3>
 <ol><li>The VPC should contain 2 subnets, 1 public and 1 private.</li></ol>
