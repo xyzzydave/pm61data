@@ -47,7 +47,8 @@ https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?refid=em_
   <li>./create_proj.sh</li>
 </ul></ul>
 <h3>Testing</h3>
-Run the test script and this will close port 22 on the host. You can then observe the lambda will change it's output to reflect the port status.
+Run the test script and this will close port 22 on the host. You can then observe the lambda will change it's output to reflect the port status.<br>
+It's probably easiest to go to the lambda console and run it to see the output change.
 <h2>Code Challenge Requirements</h2>
 <h3>VPC</h3>
 <ol><li>The VPC should contain 2 subnets, 1 public and 1 private.</li></ol>
