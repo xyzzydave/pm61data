@@ -1,4 +1,5 @@
 #!/bin/bash
+# This script will create an ssh key pair, a vpc, and ec2 an s3 bucket and a lambda.
 aws ec2 create-key-pair --key-name testkey1 --region us-west-2
 aws cloudformation create-stack --stack-name s3bucket-codeproject --template-body file://infrastructure/s3.yml --region us-west-2
 aws cloudformation wait stack-create-complete --stack-name s3bucket-codeproject  --region us-west-2
