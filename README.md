@@ -24,7 +24,7 @@ There is also a script to take everything down.<br>
 <li>The project uses nested stacks to allow for the ec2 and lambda to be updated/replaced independently of the vpc.</li>
 </ul>
 <h2>Getting started using this repo</h2>
-<ul> 
+
 <h3>Quickstart</h3>
 ./create_proj.sh <== run that<br>
 <h3>Instructions</h3>
