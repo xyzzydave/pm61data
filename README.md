@@ -1,4 +1,5 @@
 # pm61data code challenge
+## This project will
 This project will create a vpc, an ec2 and a lambda that checks port 22 on the ec2 instance continually.
 <br>
 To create everything run the create_proj.sh.<br>
@@ -9,6 +10,7 @@ And finally, a lambda stack.<br>
 <br>
 There is also a script to take everything down.<br>
 <br>
+## Cool features
 Some of the cool features of this project are; <br>
 &nbsp;&nbsp;&nbsp;&nbsp;the ec2 has the ssm agent installed so you can get into it if you need to.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;the lambda knows the ip of the ec2 through a cloudformation export.<br>
