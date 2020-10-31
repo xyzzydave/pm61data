@@ -1,5 +1,5 @@
 # pm61data code challenge
-![Lighting the Way in the Darkness](https://www.deviantart.com/zott0123/art/Prometheus-Fire-500535834 | 955x705)
+![Lighting the Way in the Darkness](https://www.deviantart.com/zott0123/art/Prometheus-Fire-500535834 =955x705)
 ## This project will
 This project will create a vpc, an ec2 and a lambda that checks port 22 on the ec2 instance continually.
 <br>
