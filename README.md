@@ -1,8 +1,8 @@
 <ul>
-<li>pm61data code challenge
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Creation_of_man_Prometheus_Berthelemy_Louvre_INV20043.jpg" alt="Lighting the Way" /></li>
-<li>This project will</li>
-<li>This project will create a vpc, an ec2 and a lambda that checks port 22 on the ec2 instance continually.
+<li><h1>pm61data code challenge
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Creation_of_man_Prometheus_Berthelemy_Louvre_INV20043.jpg" alt="Lighting the Way" /></h1></li>
+<li><h2>This project will</h2></li>
+<li><h2>This project will create a vpc, an ec2 and a lambda that checks port 22 on the ec2 instance continually.</h2>
 <br>
 To create everything run the create_proj.sh.<br>
 This will create an s3 bucket and a key pair, upload a few CloudFormation templates to the bucket and then create 3 stacks.<br>
@@ -13,7 +13,7 @@ And finally, a lambda stack.<br>
 There is also a script to take everything down.<br>
 <br>
 </li>
-<li> Cool features
+<li> <h2>Cool features</h2>
 Some of the cool features of this project are; <br>
 &nbsp;&nbsp;&nbsp;&nbsp;the ec2 has the ssm agent installed so you can get into it if you need to.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;the lambda knows the ip of the ec2 through a cloudformation export.<br>
@@ -22,27 +22,31 @@ Some of the cool features of this project are; <br>
 &nbsp;&nbsp;&nbsp;&nbsp;it took 6 fairly small files to do all the work.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;the project uses nested stacks to allow for the ec2 and lambda to be updated/replaced independently of the vpc.  
 </li>
-<li> Getting started using this repo</li>
+<li><h2>Getting started using this repo</h2></li>
 <ul> 
-<li> Quickstart
+<li><h3>Quickstart</h3>
 ./create_proj.sh <== run that<br>
 </li>
-<li> Instructions
+<li><h3>Instructions</h3>
 Following are instructions to run an .sh script that will use the aws cli to run the cloudformation templates in this repo to create a vpc, ec2 and a lambda according to the pm61data code challenge specifications.
 </li>
-<li> Sign up for an aws account
+ <li><h3>Sign up for an aws account</h3>
 https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?refid=em_127222
 </li>
-<li>Navigate to the Cloud9 ide service
-* Login to the account.
-* Change the region to us-west-2 or Oregon. Look at the top right.
-* Go to Cloud9 service.
-* Bring up the debugger (F6) for Windows users. 
-* Click the green plus sign and select new terminal.
-* Do the following in the debugger terminal
-  * git clone https://github.com/ddtraveller/pm61data.git
-  * cd pm61data
-  * ./create_proj.sh
+ <li>
+ 
+<dl>
+<dt><h3>Navigate to the Cloud9 ide service</h3></dt>
+<dd>Login to the account.
+<dd>Change the region to us-west-2 or Oregon. Look at the top right.
+<dd>Go to Cloud9 service.
+<dd>Bring up the debugger (F6) for Windows users. 
+<dd>Click the green plus sign and select new terminal.
+<dd>Do the following in the debugger terminal;<br>
+  * git clone https://github.com/ddtraveller/pm61data.git<br>
+  * cd pm61data<br>
+  * ./create_proj.sh<br>
+</dl>
 </li>
 <li> Code Challenge Requirements
  </ul>
