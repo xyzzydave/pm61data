@@ -51,7 +51,7 @@ Place an EC2 instance in the private subnet with following requirements:
 instances/Lambda functions from the same VPC can access this instance.</li>
 <li>This instance should be able to make outbound call to access the internet (e.g., pip
 install some software)</li>
-<li>This instance only allows inbound access from port 22
+<li>This instance only allows inbound access from port 22</li></ol>
 <h3>Lambda Function</h3>
 Write a simple Lambda function with following requirements:
 <ol><li>This lambda function needs to be placed in the same subnet as the private instance.</li>
