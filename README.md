@@ -10,9 +10,9 @@ And finally, a lambda stack.<br>
 There is also a script to take everything down.<br>
 <br>
 Some of the cool features of this project are; <br>
-&nbsp;&nbsp;&nbsp;&nbsp;the ec2 has the ssm agent installed so you can get into it if you need to.
-&nbsp;&nbsp;&nbsp;&nbsp;the lambda knows the ip of the ec2 through a cloudformation export.
-&nbsp;&nbsp;&nbsp;&nbsp;the code for the lambda is defined inline in the template which is nice for small lambda projects. 
-&nbsp;&nbsp;&nbsp;&nbsp;there are 2 ways to get an attribute: 1) !Sub ${LambdaSchedule.Arn} 2) !GetAtt LambdaSchedule.Arn I use !Sub in the lambda and GetAtt in the ec2 template just for fun.
-&nbsp;&nbsp;&nbsp;&nbsp;it took 6 fairly small files to do all the work.
+&nbsp;&nbsp;&nbsp;&nbsp;the ec2 has the ssm agent installed so you can get into it if you need to.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the lambda knows the ip of the ec2 through a cloudformation export.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the code for the lambda is defined inline in the template which is nice for small lambda projects. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;there are 2 ways to get an attribute: 1) !Sub ${LambdaSchedule.Arn} 2) !GetAtt LambdaSchedule.Arn I use !Sub in the lambda and GetAtt in the ec2 template just for fun.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it took 6 fairly small files to do all the work.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;the project uses nested stacks to allow for the ec2 and lambda to be updated/replaced independently of the vpc.  
