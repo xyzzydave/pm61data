@@ -1,5 +1,5 @@
 # pm61data code challenge
-<img src="https://www.deviantart.com/zott0123/art/Prometheus-Fire-500535834" alt="Lighting the Way" width="955.123px" height="705px" />
+<img src=https://upload.wikimedia.org/wikipedia/commons/4/49/Creation_of_man_Prometheus_Berthelemy_Louvre_INV20043.jpg" alt="Lighting the Way" width="955.123px" height="705px" />
 ## This project will
 This project will create a vpc, an ec2 and a lambda that checks port 22 on the ec2 instance continually.
 <br>
