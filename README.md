@@ -6,11 +6,11 @@ This proect will;
 <li>create an s3 bucket via cloudformation</li>
 <li>create a key pair</li> 
 <li>upload a few CloudFormation templates to the bucket and then create 3 stacks.</li>
-<ol>
+<ul>
 <li>A vpc stack.</li>
 <li>An ec2 stack.</li>
 <li>And finally, a lambda stack.</li>
-</ol</ul>
+</ul></ul>
 There is also a script to take everything down.<br>
 <br>
 
